@@ -1,0 +1,25 @@
+name: muslim_kids_learning_app
+description: A bilingual (Urdu + English) Muslim Kids Learning App skeleton.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.5
+  audioplayers: ^0.20.1
+  shared_preferences: ^2.0.15
+  google_fonts: ^4.0.3
+  lottie: ^2.2.0
+  flutter_localizations:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/audio/
+    - assets/data/

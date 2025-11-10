@@ -1,0 +1,12 @@
+[
+  {
+    "title_en": "Al-Fatiha",
+    "title_ur": "الفاتحہ",
+    "audio": "assets/audio/surah_fatiha.mp3"
+  },
+  {
+    "title_en": "Al-Ikhlas",
+    "title_ur": "الاخلاص",
+    "audio": "assets/audio/surah_ikhlas.mp3"
+  }
+]

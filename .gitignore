@@ -1,0 +1,14 @@
+# Flutter/Dart/Pub related
+.dart_tool/
+.packages
+.pub-cache/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.idea/
+.vscode/
+android/.gradle/
+android/app/build/
+local.properties
