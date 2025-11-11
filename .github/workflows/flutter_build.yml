@@ -1,4 +1,4 @@
-name: Flutter Build (APK & Web)
+name: Flutter APK Build
 
 on:
   push:
@@ -8,38 +8,32 @@ on:
 
 jobs:
   build:
-    name: Build Flutter App
+    name: Build Android APK
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ GitHub سے سورس کوڈ حاصل کریں
+      # 1️⃣ GitHub ریپو حاصل کریں
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Flutter SDK انسٹال کریں
+      # 2️⃣ Flutter انسٹال کریں
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.24.0" # آپ چاہیں تو نیا ورژن لکھ سکتے ہیں
+          flutter-version: "3.24.0"
           channel: stable
 
       # 3️⃣ Dependencies حاصل کریں
       - name: Get dependencies
         run: flutter pub get
 
-      # 4️⃣ Web build تیار کریں
-      - name: Build Web
-        run: flutter build web --release
-
-      # 5️⃣ Android APK build کریں
-      - name: Build Android APK
+      # 4️⃣ Android ریلیز APK بنائیں
+      - name: Build Release APK
         run: flutter build apk --release
 
-      # 6️⃣ Built artifacts اپلوڈ کریں (APK + Web)
-      - name: Upload Build Artifacts
+      # 5️⃣ تیار شدہ APK کو بطور Artifact اپلوڈ کریں
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: flutter_builds
-          path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/web
+          name: MuslimKidsLearningApp-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
