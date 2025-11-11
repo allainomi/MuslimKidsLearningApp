@@ -1,4 +1,4 @@
-name: Flutter APK Build
+name: Flutter APK Build & Release
 
 on:
   push:
@@ -7,26 +7,50 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_apk:
+  build_and_release_apk:
     runs-on: ubuntu-latest
+
     steps:
+      # 1️⃣ Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2️⃣ Install Flutter
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: "3.24.0"
           channel: stable
 
+      # 3️⃣ Get dependencies
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Build release APK
+      # 4️⃣ Build release APK
+      - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK artifact
+      # 5️⃣ Upload APK as artifact
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: MuslimKidsLearningApp-APK
           path: build/app/outputs/flutter-apk/app-release.apk
+
+      # 6️⃣ Create GitHub Release and upload APK
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: "MuslimKidsLearningApp v${{ github.run_number }}"
+          body: "Automated release from GitHub Actions"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build/app/outputs/flutter-apk/app-release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
